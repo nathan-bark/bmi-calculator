@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@font-face{
+  font-family: "Inter-Semi";
+  font-display: swap;
+  src: url('./assets/fonts/static/Inter-SemiBold.ttf');
+}
+
+@font-face{
+  font-family: 'Inter';
+  font-display: swap;
+  src: url('./assets/fonts/static/Inter-Regular.ttf');
+}
+
+/* colours */
+
+@theme {
+  --color-gray-dark: oklch(0.5337 0.0411 257.42);
+  --color-gray-light: oklch(0.8046 0.0472 256.48);
+
+  --color-blue-dark: oklch(0.318 0.0406 257.29);
+  --color-blue-navy: oklch(0.5527 0.2303 266.32);
+  --color-blue-sky: oklch(0.8534 0.0541 246.75);
+  --color-blue-violet: oklch(0.9304 0.0318 274.12);
+
+  --color-gradient-start: oklch(0.9649 0.0391 200.44);
+  --color-gradient-end: oklch(0.9204 0.037 258.37);
+}
+
+/* typography */
+
+@theme{
+  --text-preset-1: 4rem;
+  --text-preset-1--line-height: 110%;
+  --text-prest-1--letter-spacing: -5%;
+
+  --text-preset-2: 3rem;
+  --text-preset-2--line-height: 110%;
+  --text-preset-2--letter-spacing: -5%;
+
+  --text-preset-3: 20.25rem;
+  --text-preset-3--line-height: 110%;
+  --text-preset-3--letter-spacing: -5%;
+
+  --text-preset-4: 1.5rem;
+  --text-preset-4--line-height: 120%;
+  --text-preset-4--letter-spacing: -5%;
+
+  --text-preset-5: 1rem;
+  --text-preset-5--line-height: 120%;
+  --text-preset-5--letter-spacing: -5%;
+
+  --text-preset-6: 1rem;
+  --text-preset-6--line-height: 150%;
+  --text-preset-6--letter-spacing: 0%;
+
+  --text-preset-7: 0.875rem;
+  --text-preset-7--line-height: 150%;
+  --text-preset-7--letter-spacing: 0%;
+
+
+}
