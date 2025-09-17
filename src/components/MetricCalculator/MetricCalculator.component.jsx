@@ -3,10 +3,10 @@ import React from "react";
 const MetricCalculator = ({  setHeight, setWeight }) => {
   const handleHeightChange = (event) => {
     const cmToM = event.target.value / 100;
-    setHeight(cmToM);
+    setHeight(Number(cmToM));
   };
   const handleWeightChange = (event) => {
-    setWeight(event.target.value);
+    setWeight(Number(event.target.value));
   };
 
   return (

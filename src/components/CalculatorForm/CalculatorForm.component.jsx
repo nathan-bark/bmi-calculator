@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import MetricCalculator from "../MetricCalculator/MetricCalculator";
+import MetricCalculator from "../MetricCalculator/MetricCalculator.component";
+import ImperialCalculator from "../ImperialCalculator/ImperialCalculator.component";
 
 const CalculatorForm = () => {
   const [system, setSystem] = useState("metric");
@@ -27,8 +28,35 @@ const CalculatorForm = () => {
     setMaxWeight(upperWeight.toFixed(1));
   };
 
+  const ImperialBMI = (heightInput, weightInput) => {
+    const bmi = 703 * (weightInput / (heightInput * heightInput));
+    return bmi.toFixed(1);
+  };
+
+  const ImperialWeightRange = (rangeHeight) => {
+    const heightToNum = Number(rangeHeight);
+    const lowerWeight = (18.5 * (heightToNum * heightToNum)) / 703;
+    const upperWeight = (24.9 * (heightToNum * heightToNum)) / 703;
+
+    setMinWeight(lowerWeight.toFixed(1));
+    setMaxWeight(upperWeight.toFixed(1));
+  };
+
+  const poundsToStones = (pounds) => {
+    return Math.floor(pounds / 14);
+  }
+
+  const remainderPounds = (pounds) => {
+        const newPounds = pounds % 14;
+        return newPounds.toFixed(0);    
+  }
+
   useEffect(() => {
-    metricWeightRange(height);
+    if (system === "imperial") {
+      ImperialWeightRange(height);
+    } else {
+      metricWeightRange(height);
+    }
   }, [height]);
 
   return (
@@ -55,14 +83,16 @@ const CalculatorForm = () => {
         <label htmlFor="imperial">Imperial</label>
       </fieldset>
 
-      {system === "metric" && (
+      {system === "metric" ? (
         <MetricCalculator setHeight={setHeight} setWeight={setWeight} />
+      ) : (
+        <ImperialCalculator setHeight={setHeight} setWeight={setWeight} />
       )}
 
-      <p>your BMI is{metricBMI(height, weight)}</p>
+      <p>your BMI is{ImperialBMI(height, weight)}</p>
 
       <p>
-        Your ideal weight is between {minWeight}kg and {maxWeight}kg
+        Your ideal weight is between {poundsToStones(minWeight)}St {remainderPounds(minWeight)}Lbs and {poundsToStones(maxWeight)}St {remainderPounds(maxWeight)}Lbs
       </p>
     </div>
 
