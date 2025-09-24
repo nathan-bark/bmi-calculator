@@ -7,12 +7,15 @@ const CalculatorForm = () => {
   const [system, setSystem] = useState("metric");
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
-  const [bodyMassIndex, setBodyMassIndex] = useState('0.0');
+  const [bodyMassIndex, setBodyMassIndex] = useState("0.0");
   const [formattedBMI, setFormattedBMI] = useState(0);
   const [minWeight, setMinWeight] = useState(0);
   const [maxWeight, setMaxWeight] = useState(0);
 
-  const isBMIValid = !isNaN(bodyMassIndex) && bodyMassIndex > 10 && Number.isFinite(bodyMassIndex);
+  const isBMIValid =
+    !isNaN(bodyMassIndex) &&
+    bodyMassIndex > 10 &&
+    Number.isFinite(formattedBMI);
 
   const handleSystemChange = (event) => {
     setSystem(event.target.value);
@@ -20,9 +23,10 @@ const CalculatorForm = () => {
 
   const metricBMI = (heightInput, weightInput) => {
     const bmi = weightInput / (heightInput * heightInput);
-    
+
     setFormattedBMI(Number(bmi.toFixed(1)));
     setBodyMassIndex(bmi.toFixed(1));
+    
   };
 
   const metricWeightRange = (rangeHeight) => {
@@ -110,7 +114,8 @@ const CalculatorForm = () => {
                 ? "overweight"
                 : formattedBMI > 18.5
                 ? "a healthy weight"
-                : "underweight"}.  Your ideal weight is between {minWeight}kg and {maxWeight}kg
+                : "underweight"}
+              . Your ideal weight is between {minWeight}kg and {maxWeight}kg
             </p>
           </div>
         ) : (
