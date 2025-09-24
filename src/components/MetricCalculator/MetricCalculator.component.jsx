@@ -4,6 +4,7 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
   const [metricHeight, setMetricHeight] = useState(0);
   const [metricWeight, setMetricWeight] = useState(0);
 
+  
   const handleHeightChange = (event) => {
     let value = event.target.value;
     if (value.length > 1 && value.startsWith("0")) {

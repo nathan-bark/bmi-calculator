@@ -7,11 +7,12 @@ const CalculatorForm = () => {
   const [system, setSystem] = useState("metric");
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
-  const [bodyMassIndex, setBodyMassIndex] = useState(0);
+  const [bodyMassIndex, setBodyMassIndex] = useState('0.0');
+  const [formattedBMI, setFormattedBMI] = useState(0);
   const [minWeight, setMinWeight] = useState(0);
   const [maxWeight, setMaxWeight] = useState(0);
 
-  const isBMIValid = !isNaN(bodyMassIndex) && bodyMassIndex > 10;
+  const isBMIValid = !isNaN(bodyMassIndex) && bodyMassIndex > 10 && Number.isFinite(bodyMassIndex);
 
   const handleSystemChange = (event) => {
     setSystem(event.target.value);
@@ -19,8 +20,9 @@ const CalculatorForm = () => {
 
   const metricBMI = (heightInput, weightInput) => {
     const bmi = weightInput / (heightInput * heightInput);
-
-    setBodyMassIndex(Number(bmi.toFixed(1)));
+    
+    setFormattedBMI(Number(bmi.toFixed(1)));
+    setBodyMassIndex(bmi.toFixed(1));
   };
 
   const metricWeightRange = (rangeHeight) => {
@@ -33,7 +35,8 @@ const CalculatorForm = () => {
 
   const imperialBMI = (heightInput, weightInput) => {
     const bmi = 703 * (weightInput / (heightInput * heightInput));
-    setBodyMassIndex(Number(bmi.toFixed(1)));
+    setFormattedBMI(Number(bmi.toFixed(1)));
+    setBodyMassIndex(bmi.toFixed(1));
   };
 
   const ImperialWeightRange = (rangeHeight) => {
@@ -96,17 +99,39 @@ const CalculatorForm = () => {
 
       {isBMIValid ? (
         system === "metric" ? (
-          <p>
-            Your BMI is {bodyMassIndex} and your ideal weight is between{" "}
-            {minWeight}kg and {maxWeight}kg
-          </p>
+          <div>
+            <p>Your BMI is... {bodyMassIndex}</p>{" "}
+            <p>
+              {" "}
+              Your BMI suggests you are{" "}
+              {formattedBMI > 30
+                ? "obese"
+                : formattedBMI > 25
+                ? "overweight"
+                : formattedBMI > 18.5
+                ? "a healthy weight"
+                : "underweight"}.  Your ideal weight is between {minWeight}kg and {maxWeight}kg
+            </p>
+          </div>
         ) : (
-          <p>
-            Your BMI is {bodyMassIndex} and your ideal weight is between{" "}
-            {poundsToStones(minWeight)} stone {remainderPounds(minWeight)}lbs
-            and {poundsToStones(maxWeight)} stone {remainderPounds(maxWeight)}
-            lbs
-          </p>
+          <div>
+            <p>Your BMI is... {bodyMassIndex}</p>
+            <p>
+              {" "}
+              Your BMI suggests you are{" "}
+              {formattedBMI > 30
+                ? "obese"
+                : formattedBMI > 25
+                ? "overweight"
+                : formattedBMI > 18.5
+                ? "a healthy weight"
+                : "underweight"}
+              . Your ideal weight is between {poundsToStones(minWeight)} stone{" "}
+              {remainderPounds(minWeight)}lbs and {poundsToStones(maxWeight)}{" "}
+              stone {remainderPounds(maxWeight)}
+              lbs
+            </p>
+          </div>
         )
       ) : (
         <div>
