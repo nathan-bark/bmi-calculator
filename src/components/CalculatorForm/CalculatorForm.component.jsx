@@ -7,8 +7,11 @@ const CalculatorForm = () => {
   const [system, setSystem] = useState("metric");
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
+  const [bodyMassIndex, setBodyMassIndex] = useState(0);
   const [minWeight, setMinWeight] = useState(0);
   const [maxWeight, setMaxWeight] = useState(0);
+
+  const isBMIValid = !isNaN(bodyMassIndex) && bodyMassIndex > 10;
 
   const handleSystemChange = (event) => {
     setSystem(event.target.value);
@@ -17,7 +20,7 @@ const CalculatorForm = () => {
   const metricBMI = (heightInput, weightInput) => {
     const bmi = weightInput / (heightInput * heightInput);
 
-    return Number(bmi.toFixed(1));
+    setBodyMassIndex(Number(bmi.toFixed(1)));
   };
 
   const metricWeightRange = (rangeHeight) => {
@@ -28,9 +31,9 @@ const CalculatorForm = () => {
     setMaxWeight(upperWeight.toFixed(1));
   };
 
-  const ImperialBMI = (heightInput, weightInput) => {
+  const imperialBMI = (heightInput, weightInput) => {
     const bmi = 703 * (weightInput / (heightInput * heightInput));
-    return bmi.toFixed(1);
+    setBodyMassIndex(Number(bmi.toFixed(1)));
   };
 
   const ImperialWeightRange = (rangeHeight) => {
@@ -44,20 +47,22 @@ const CalculatorForm = () => {
 
   const poundsToStones = (pounds) => {
     return Math.floor(pounds / 14);
-  }
+  };
 
   const remainderPounds = (pounds) => {
-        const newPounds = pounds % 14;
-        return newPounds.toFixed(0);    
-  }
+    const newPounds = pounds % 14;
+    return newPounds.toFixed(0);
+  };
 
   useEffect(() => {
     if (system === "imperial") {
+      imperialBMI(height, weight);
       ImperialWeightRange(height);
     } else {
+      metricBMI(height, weight);
       metricWeightRange(height);
     }
-  }, [height]);
+  }, [height, weight, system]);
 
   return (
     <div>
@@ -89,14 +94,29 @@ const CalculatorForm = () => {
         <ImperialCalculator setHeight={setHeight} setWeight={setWeight} />
       )}
 
-      <p>your BMI is{ImperialBMI(height, weight)}</p>
-
-      <p>
-        Your ideal weight is between {poundsToStones(minWeight)}St {remainderPounds(minWeight)}Lbs and {poundsToStones(maxWeight)}St {remainderPounds(maxWeight)}Lbs
-      </p>
+      {isBMIValid ? (
+        system === "metric" ? (
+          <p>
+            Your BMI is {bodyMassIndex} and your ideal weight is between{" "}
+            {minWeight}kg and {maxWeight}kg
+          </p>
+        ) : (
+          <p>
+            Your BMI is {bodyMassIndex} and your ideal weight is between{" "}
+            {poundsToStones(minWeight)} stone {remainderPounds(minWeight)}lbs
+            and {poundsToStones(maxWeight)} stone {remainderPounds(maxWeight)}
+            lbs
+          </p>
+        )
+      ) : (
+        <div>
+          <h3>Welcome!</h3>
+          <p>
+            Enter your height and weight and you'll see your BMI result here
+          </p>
+        </div>
+      )}
     </div>
-
-    // display metirc form or imperial form based on system variable
   );
 };
 

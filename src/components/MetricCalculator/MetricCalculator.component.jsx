@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
-const MetricCalculator = ({  setHeight, setWeight }) => {
+const MetricCalculator = ({ setHeight, setWeight }) => {
+  const [metricHeight, setMetricHeight] = useState(0);
+  const [metricWeight, setMetricWeight] = useState(0);
+
   const handleHeightChange = (event) => {
-    const cmToM = event.target.value / 100;
-    setHeight(Number(cmToM));
+    let value = event.target.value;
+    if (value.length > 1 && value.startsWith("0")) {
+      value = value.substring(1);
+    }
+
+    const cmToM = Number(value) / 100;
+    setMetricHeight(value);
+    setHeight(cmToM);
   };
   const handleWeightChange = (event) => {
-    setWeight(Number(event.target.value));
+    let value = event.target.value;
+
+    if (value.length > 1 && value.startsWith("0")) {
+      value = value.substring(1);
+    }
+    setMetricWeight(value);
+    setWeight(value);
   };
 
   return (
@@ -19,6 +34,7 @@ const MetricCalculator = ({  setHeight, setWeight }) => {
           id="height"
           name="height"
           onChange={handleHeightChange}
+          value={metricHeight}
         />
 
         <label htmlFor="weight">Weight</label>
@@ -28,6 +44,7 @@ const MetricCalculator = ({  setHeight, setWeight }) => {
           id="weight"
           name="weight"
           onChange={handleWeightChange}
+          value={metricWeight}
         />
       </fieldset>
     </div>
