@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import MetricCalculator from "../MetricCalculator/MetricCalculator.component";
 import ImperialCalculator from "../ImperialCalculator/ImperialCalculator.component";
+import WelcomeMessage from "../WelcomeMessage/WelcomeMessage.component";
 
 const CalculatorForm = () => {
   const [system, setSystem] = useState("metric");
@@ -26,7 +27,6 @@ const CalculatorForm = () => {
 
     setFormattedBMI(Number(bmi.toFixed(1)));
     setBodyMassIndex(bmi.toFixed(1));
-    
   };
 
   const metricWeightRange = (rangeHeight) => {
@@ -101,51 +101,16 @@ const CalculatorForm = () => {
         <ImperialCalculator setHeight={setHeight} setWeight={setWeight} />
       )}
 
-      {isBMIValid ? (
-        system === "metric" ? (
-          <div>
-            <p>Your BMI is... {bodyMassIndex}</p>{" "}
-            <p>
-              {" "}
-              Your BMI suggests you are{" "}
-              {formattedBMI > 30
-                ? "obese"
-                : formattedBMI > 25
-                ? "overweight"
-                : formattedBMI > 18.5
-                ? "a healthy weight"
-                : "underweight"}
-              . Your ideal weight is between {minWeight}kg and {maxWeight}kg
-            </p>
-          </div>
-        ) : (
-          <div>
-            <p>Your BMI is... {bodyMassIndex}</p>
-            <p>
-              {" "}
-              Your BMI suggests you are{" "}
-              {formattedBMI > 30
-                ? "obese"
-                : formattedBMI > 25
-                ? "overweight"
-                : formattedBMI > 18.5
-                ? "a healthy weight"
-                : "underweight"}
-              . Your ideal weight is between {poundsToStones(minWeight)} stone{" "}
-              {remainderPounds(minWeight)}lbs and {poundsToStones(maxWeight)}{" "}
-              stone {remainderPounds(maxWeight)}
-              lbs
-            </p>
-          </div>
-        )
-      ) : (
-        <div>
-          <h3>Welcome!</h3>
-          <p>
-            Enter your height and weight and you'll see your BMI result here
-          </p>
-        </div>
-      )}
+      <WelcomeMessage
+        isBMIValid={isBMIValid}
+        system={system}
+        bodyMassIndex={bodyMassIndex}
+        formattedBMI={formattedBMI}
+        minWeight={minWeight}
+        maxWeight={maxWeight}
+        remainderPounds={remainderPounds}
+        poundsToStones={poundsToStones}
+      />
     </div>
   );
 };

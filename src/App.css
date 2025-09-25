@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
-@font-face{
+@font-face {
   font-family: "Inter-Semi";
   font-display: swap;
-  src: url('./assets/fonts/static/Inter-SemiBold.ttf');
+  src: url("./assets/fonts/static/Inter-SemiBold.ttf");
 }
 
-@font-face{
-  font-family: 'Inter';
+@font-face {
+  font-family: "Inter";
   font-display: swap;
-  src: url('./assets/fonts/static/Inter-Regular.ttf');
+  src: url("./assets/fonts/static/Inter-Regular.ttf");
 }
 
 /* colours */
@@ -29,7 +29,7 @@
 
 /* typography */
 
-@theme{
+@theme {
   --text-preset-1: 4rem;
   --text-preset-1--line-height: 110%;
   --text-prest-1--letter-spacing: -5%;
@@ -57,6 +57,4 @@
   --text-preset-7: 0.875rem;
   --text-preset-7--line-height: 150%;
   --text-preset-7--letter-spacing: 0%;
-
-
 }
