@@ -26,8 +26,8 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
 
   return (
     <div>
-      <fieldset>
-        <label htmlFor="height">Height</label>
+      <fieldset className="">
+        <label htmlFor="height" className="text-preset-7 text-gray-dark">Height</label>
         <div className="relative inline-block">
           <input
             type="number"
@@ -36,14 +36,14 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
             name="height"
             onChange={handleHeightChange}
             value={metricHeight}
-            className="w-50 rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
             cm
           </span>
         </div>
 
-        <label htmlFor="weight">Weight</label>
+        <label htmlFor="weight" className="text-preset-7 text-gray-dark">Weight</label>
         <div className="relative inline-block">
           <input
             type="number"
@@ -52,7 +52,7 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
             name="weight"
             onChange={handleWeightChange}
             value={metricWeight}
-            className="w-50 rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
             kg

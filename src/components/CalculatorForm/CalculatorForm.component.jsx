@@ -4,6 +4,8 @@ import MetricCalculator from "../MetricCalculator/MetricCalculator.component";
 import ImperialCalculator from "../ImperialCalculator/ImperialCalculator.component";
 import WelcomeMessage from "../WelcomeMessage/WelcomeMessage.component";
 
+import logo from "../../assets/images/logo.svg";
+
 const CalculatorForm = () => {
   const [system, setSystem] = useState("metric");
   const [height, setHeight] = useState(0);
@@ -72,45 +74,72 @@ const CalculatorForm = () => {
   }, [height, weight, system]);
 
   return (
-    <div>
-      <h2>Enter yourdetails below</h2>
-      <fieldset>
-        <input
-          type="radio"
-          name="system"
-          value="metric"
-          id="metric"
-          checked={system === "metric"}
-          onChange={handleSystemChange}
+    <div className="flex flex-col justify-center items-center text-center pt-8 px-6 bg-linear-to-r from-gradient-start to-gradient-end">
+      <img src={logo} alt="logo" className="h-10 w-10 mb-8" />
+      <h1 className="font-inter-semi text-preset-2 text-blue-dark mb-6">
+        Body Mass Index Calculator
+      </h1>
+      <p className="font-inter text-preset-6 text-gray-dark mb-8">
+        Better understand your weight in relation to your height using our body
+        mass index (BM) calculator. While BMI is not the sole determinant of a
+        healthy weight, it offers a valuable starting point to evaluate your
+        overall health and well-being.
+      </p>
+
+      <fieldset className="bg-white rounded-2xl p-6">
+        <h2 className="font-inter-semi text-preset-4 text-blue-dark">
+          Enter your details below
+        </h2>
+        <div className="my-6 flex flex-row justify-center items-center">
+          <input
+            type="radio"
+            name="system"
+            value="metric"
+            id="metric"
+            checked={system === "metric"}
+            onChange={handleSystemChange}
+            className="w-[31px] h-[31px] rounded-3xl "
+          />
+          <label
+            htmlFor="metric"
+            className="font-inter-semi text-preset-6 text-blue-dark mr-6 ml-4"
+          >
+            Metric
+          </label>
+          <input
+            type="radio"
+            name="system"
+            value="imperial"
+            id="imperial"
+            checked={system === "imperial"}
+            onChange={handleSystemChange}
+            className=" w-[31px] h-[31px]"
+          />
+          <label
+            htmlFor="imperial"
+            className="font-inter-semi text-preset-6 text-blue-dark ml-4"
+          >
+            Imperial
+          </label>
+        </div>
+
+        {system === "metric" ? (
+          <MetricCalculator setHeight={setHeight} setWeight={setWeight} />
+        ) : (
+          <ImperialCalculator setHeight={setHeight} setWeight={setWeight} />
+        )}
+
+        <WelcomeMessage
+          isBMIValid={isBMIValid}
+          system={system}
+          bodyMassIndex={bodyMassIndex}
+          formattedBMI={formattedBMI}
+          minWeight={minWeight}
+          maxWeight={maxWeight}
+          remainderPounds={remainderPounds}
+          poundsToStones={poundsToStones}
         />
-        <label htmlFor="metric">Metric</label>
-        <input
-          type="radio"
-          name="system"
-          value="imperial"
-          id="imperial"
-          checked={system === "imperial"}
-          onChange={handleSystemChange}
-        />
-        <label htmlFor="imperial">Imperial</label>
       </fieldset>
-
-      {system === "metric" ? (
-        <MetricCalculator setHeight={setHeight} setWeight={setWeight} />
-      ) : (
-        <ImperialCalculator setHeight={setHeight} setWeight={setWeight} />
-      )}
-
-      <WelcomeMessage
-        isBMIValid={isBMIValid}
-        system={system}
-        bodyMassIndex={bodyMassIndex}
-        formattedBMI={formattedBMI}
-        minWeight={minWeight}
-        maxWeight={maxWeight}
-        remainderPounds={remainderPounds}
-        poundsToStones={poundsToStones}
-      />
     </div>
   );
 };
