@@ -26,8 +26,13 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
 
   return (
     <div>
-      <fieldset className="">
-        <label htmlFor="height" className="text-preset-7 text-gray-dark">Height</label>
+      <fieldset className="flex flex-col">
+        <label
+          htmlFor="height"
+          className="text-preset-7 text-gray-dark self-start mb-2"
+        >
+          Height
+        </label>
         <div className="relative inline-block">
           <input
             type="number"
@@ -36,14 +41,19 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
             name="height"
             onChange={handleHeightChange}
             value={metricHeight}
-            className="w-full rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-preset-4 text-blue-dark"
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-navy pointer-events-none text-preset-4">
             cm
           </span>
         </div>
 
-        <label htmlFor="weight" className="text-preset-7 text-gray-dark">Weight</label>
+        <label
+          htmlFor="weight"
+          className="text-preset-7 text-gray-dark self-start mb-2 mt-4"
+        >
+          Weight
+        </label>
         <div className="relative inline-block">
           <input
             type="number"
@@ -52,9 +62,9 @@ const MetricCalculator = ({ setHeight, setWeight }) => {
             name="weight"
             onChange={handleWeightChange}
             value={metricWeight}
-            className="w-full rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 pr-12 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-preset-4 text-blue-dark"
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-navy text-preset-4 pointer-events-none">
             kg
           </span>
         </div>

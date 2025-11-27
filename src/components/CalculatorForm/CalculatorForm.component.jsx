@@ -98,7 +98,7 @@ const CalculatorForm = () => {
             id="metric"
             checked={system === "metric"}
             onChange={handleSystemChange}
-            className="w-[31px] h-[31px] rounded-3xl "
+            className="w-[31px] h-[31px]"
           />
           <label
             htmlFor="metric"

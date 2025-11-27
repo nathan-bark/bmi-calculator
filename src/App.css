@@ -63,3 +63,32 @@
   --text-preset-7--line-height: 1.5;
   --text-preset-7--letter-spacing: 0;
 }
+
+/* radio buttons */
+
+input[type="radio"] {
+  appearance: none;
+  font: inherit;
+  width: 31px;
+  height: 31px;
+  border: 1px solid var(--color-gray-dark);
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--color-blue-navy);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+  outline: 8px solid var(--color-blue-violet);
+}

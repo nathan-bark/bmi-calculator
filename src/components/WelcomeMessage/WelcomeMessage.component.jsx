@@ -50,9 +50,9 @@ const WelcomeMessage = ({
           </div>
         )
       ) : (
-        <div>
-          <h3>Welcome!</h3>
-          <p>
+        <div className="bg-blue-navy text-white text-left p-8 mt-6 rounded-2xl">
+          <h3 className="text-preset-4 mb-6">Welcome!</h3>
+          <p className="text-preset-7">
             Enter your height and weight and you'll see your BMI result here
           </p>
         </div>
